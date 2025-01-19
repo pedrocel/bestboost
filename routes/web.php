@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Middleware\RedirectByProfile;
+use App\Http\Controllers\SubscriptionController;
 
 
 Route::get('/', function () {
@@ -23,6 +24,8 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/create-subscription', [SubscriptionController::class, 'create'])->name('sunscription.create');
 
 
 Route::middleware(['auth', RedirectByProfile::class])->prefix('admin')->group(function () {
