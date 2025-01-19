@@ -39,7 +39,7 @@
         <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 bg-[#252f3f] text-gray-100 flex flex-col transition-all duration-300">
             <!-- Parte Superior com logo e fundo branco -->
             <div class="flex justify-between items-center px-4 py-5 bg-[#1E1E1E]">
-                <img src="/img/bestBoost-original.png" alt="Logo" class="w-32 h-auto"> <!-- Logo -->
+                <img src="/img/banner.png" alt="Logo" class="w-32 h-auto"> <!-- Logo -->
                 <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 focus:outline-none text-sm">
                     &#9776;
                 </button>
