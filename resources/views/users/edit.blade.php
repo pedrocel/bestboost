@@ -7,7 +7,7 @@
 
     <div class="container mx-auto px-4 py-6">
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <form method="POST" action="{{ route('users.update', $user) }}">
+            <form method="POST" action="{{ route('admin.users.update', $user) }}">
                 @csrf
                 @method('PUT')
 

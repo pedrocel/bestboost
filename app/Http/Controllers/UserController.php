@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PerfilModel;
 use App\Models\User;
+use App\Models\UserPerfilModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,18 +19,27 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');  // Exibe o formulário para criar um novo usuário
+        $perfis = PerfilModel::all();
+
+        return view('users.create', compact('perfis'));  // Exibe o formulário para criar um novo usuário
     }
 
     public function store(Request $request)
     {
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
+        UserPerfilModel::create([
+            'user_id' => $user->id,
+            'perfil_id' => $request['perfil_id'],
+            'is_atual' => 1, // Ou qualquer outro valor que você deseja para "is_atual"
+            'status' => 1, // Ou outro valor que você deseja para "status"
+        ]);
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuário criado com sucesso!');
     }
 
     public function edit(User $user)

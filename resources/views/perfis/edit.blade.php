@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="container mx-auto">
-        <form action="{{ route('perfis.update', $perfil) }}" method="POST" class="bg-white p-6 shadow rounded-lg">
+        <form action="{{ route('admin.perfis.update', $perfil) }}" method="POST" class="bg-white p-6 shadow rounded-lg">
             @csrf
             @method('PUT')
 
@@ -20,7 +20,7 @@
 
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Atualizar</button>
-                <a href="{{ route('perfis.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
+                <a href="{{ route('admin.perfis.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
             </div>
         </form>
     </div>

@@ -13,10 +13,8 @@ class PerfilModel extends Model
 
     protected $fillable = ['name'];
 
-    public function users()
+    public function userPerfis()
     {
-        return $this->belongsToMany(User::class, 'user_perfis')
-            ->withPivot('is_atual', 'status')
-            ->withTimestamps();
+        return $this->hasMany(UserPerfilModel::class, 'perfil_id');
     }
 }

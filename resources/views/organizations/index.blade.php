@@ -8,7 +8,7 @@
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0 md:space-x-4">
             <h2 class="text-lg font-medium">Gerenciamento de Organizações</h2>
-            <a href="{{ route('organizacoes.create') }}" class="bg-gradient-to-r from-[#D350F2] to-[#AB66FF] hover:bg-gradient-to-r hover:from-[#AB66FF] hover:to-[#D350F2] text-white py-2 px-4 rounded">
+            <a href="{{ route('admin.organizacoes.create') }}" class="btn-create">
                 Criar Organização
             </a>
         </div>
@@ -20,7 +20,7 @@
         @endif
 
         <table class="min-w-full rounded-lg shadow overflow-hidden" style="box-shadow: 0 1px 3px 0 rgb(175 100 253), 0 1px 2px -1px rgb(208 82 244);">
-            <thead class="bg-gradient-to-r from-[#D350F2] to-[#AB66FF]">
+            <thead class="table-blue-degrade">
                 <tr>
                     <th class="px-4 py-2 text-left text-white font-medium">ID</th>
                     <th class="px-4 py-2 text-left text-white font-medium">Nome</th>
@@ -33,8 +33,8 @@
                         <td class="px-4 py-2">{{ $organizacao->id }}</td>
                         <td class="px-4 py-2">{{ $organizacao->name }}</td>
                         <td class="px-4 py-2">
-                            <a href="{{ route('organizacoes.edit', $organizacao) }}" class="text-blue-500 hover:underline">Editar</a>
-                            <form action="{{ route('organizacoes.destroy', $organizacao) }}" method="POST" class="inline-block">
+                            <a href="{{ route('admin.organizacoes.edit', $organizacao) }}" class="text-blue-500 hover:underline">Editar</a>
+                            <form action="{{ route('admin.organizacoes.destroy', $organizacao) }}" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Deseja excluir?')">

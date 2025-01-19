@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="container mx-auto">
-        <form action="{{ route('organizacoes.store') }}" method="POST" class="bg-white p-6 shadow rounded-lg">
+        <form action="{{ route('admin.organizacoes.store') }}" method="POST" class="bg-white p-6 shadow rounded-lg">
             @csrf
 
             <div class="mb-4">
@@ -28,7 +28,7 @@
 
             <div class="flex justify-end">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Salvar</button>
-                <a href="{{ route('organizacoes.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
+                <a href="{{ route('admin.organizacoes.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
             </div>
         </form>
     </div>

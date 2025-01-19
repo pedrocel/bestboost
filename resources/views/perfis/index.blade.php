@@ -8,7 +8,7 @@
     <div class="container mx-auto">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-medium">Gerenciamento de Perfis</h2>
-            <a href="{{ route('perfis.create') }}" class="btn-create">
+            <a href="{{ route('admin.perfis.create') }}" class="btn-create">
   Cadastrar Novo Perfil
 </a>
         </div>
@@ -33,8 +33,8 @@
                         <td class="px-4 py-2">{{ $perfil->id }}</td>
                         <td class="px-4 py-2">{{ $perfil->name }}</td>
                         <td class="px-4 py-2">
-                            <a href="{{ route('perfis.edit', $perfil) }}" class="text-blue-500 hover:underline">Editar</a>
-                            <form action="{{ route('perfis.destroy', $perfil) }}" method="POST" class="inline-block">
+                            <a href="{{ route('admin.perfis.edit', $perfil) }}" class="text-blue-500 hover:underline">Editar</a>
+                            <form action="{{ route('admin.perfis.destroy', $perfil) }}" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Deseja excluir?')">

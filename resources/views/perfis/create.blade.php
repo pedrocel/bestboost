@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="container mx-auto">
-        <form action="{{ route('perfis.store') }}" method="POST" class="bg-white p-6 shadow rounded-lg">
+        <form action="{{ route('admin.perfis.store') }}" method="POST" class="bg-white p-6 shadow rounded-lg">
             @csrf
 
             <div class="mb-4">
@@ -21,7 +21,7 @@
 
             <div class="flex justify-end">
                 <button type="submit" class="btn-create">Salvar</button>
-                <a href="{{ route('perfis.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
+                <a href="{{ route('admin.perfis.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
             </div>
         </form>
     </div>

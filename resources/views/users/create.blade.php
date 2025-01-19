@@ -7,7 +7,7 @@
 
     <div class="container mx-auto px-4 py-6">
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <form method="POST" action="{{ route('users.store') }}">
+            <form method="POST" action="{{ route('admin.users.store') }}">
                 @csrf
                 
                 <div class="mb-4">
@@ -41,6 +41,22 @@
                         class="border border-gray-300 rounded px-3 py-2 w-full" 
                         required
                     >
+                </div>
+
+                <!-- Campo para selecionar o perfil -->
+                <div class="mb-4">
+                    <label for="perfil_id" class="block text-sm font-medium text-gray-700">Perfil</label>
+                    <select 
+                        name="perfil_id" 
+                        id="perfil_id" 
+                        class="border border-gray-300 rounded px-3 py-2 w-full" 
+                        required
+                    >
+                        <option value="">Selecione um perfil</option>
+                        @foreach($perfis as $perfil)
+                            <option value="{{ $perfil->id }}">{{ $perfil->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="flex justify-end">
