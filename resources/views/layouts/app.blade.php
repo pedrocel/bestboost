@@ -31,30 +31,57 @@
         #userMenuDropdown {
             display: block;
         }
+
+        @media (max-width: 768px) {
+    #sidebar {
+        width: 0;
+        opacity: 0;
+    }
+
+    /* Mostrar o sidebar quando ele estiver ativo */
+    #sidebar.open {
+        width: 16rem;
+        opacity: 1;
+    }
+
+    /* Mostrar o botão de seta para expandir */
+    #expandSidebar {
+        display: block;
+    }
+
+    /* Esconder o botão de expandir quando a sidebar estiver visível */
+    #sidebar.open #expandSidebar {
+        display: none;
+    }
+}
     </style>
 </head>
 <body class="font-sans antialiased bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
     <div class="flex">
         <!-- Sidebar -->
-        <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 bg-[#252f3f] text-gray-100 flex flex-col transition-all duration-300">
-            <!-- Parte Superior com logo e fundo branco -->
-            <div class="flex justify-between items-center px-4 py-5 bg-[#1E1E1E]">
-                <img src="/img/banner.png" alt="Logo" class="w-32 h-auto"> <!-- Logo -->
-                <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 focus:outline-none text-sm">
-                    &#9776;
-                </button>
-            </div>
-            <!-- Navegação -->
-            @if(auth()->check())
-                @if(auth()->user()->adm())
-                    @include('layouts.menu.adm')
-                @elseif(auth()->user()->cliente())
-                    @include('layouts.menu.cliente')
-                @else
-                @endif
-            @endif
+        <aside id="sidebar" class="fixed top-0 left-0 h-screen w-64 bg-[#252f3f] text-gray-100 flex flex-col transition-all duration-300" id="sidebarComponent">
+    <div class="flex justify-between items-center px-4 py-5 bg-[#1E1E1E]">
+        <img src="/img/ecommerce.png" alt="Logo" class="w-32 h-auto"> <!-- Logo -->
+        <button id="toggleSidebar" class="text-gray-600 hover:text-gray-800 focus:outline-none text-sm">
+            &#9776;
+        </button>
+    </div>
 
-        </aside>
+    <!-- Navegação -->
+    @if(auth()->check())
+        @if(auth()->user()->adm())
+            @include('layouts.menu.adm')
+        @elseif(auth()->user()->cliente())
+            @include('layouts.menu.cliente')
+        @else
+        @endif
+    @endif
+
+    <!-- Botão para mobile -->
+    <button id="expandSidebar" class="absolute bottom-4 left-4 text-white bg-[#252f3f] p-3 rounded-full hidden md:block">
+        &#8594; <!-- Seta para expandir -->
+    </button>
+</aside>
         <!-- Main Content -->
         <main id="mainContent" class="flex-1 ml-64 transition-all duration-300">
     @if (isset($header))
@@ -109,28 +136,50 @@
     </div>
 
     <script>
-        // Alternar Sidebar
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('mainContent');
-        const sidebarTitle = document.getElementById('sidebarTitle');
+    // Alternar Sidebar
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
 
-        toggleSidebar.addEventListener('click', function () {
-    if (sidebar.classList.contains('w-64')) {
-        sidebar.classList.remove('w-64');
-        sidebar.classList.add('w-20');
-        sidebar.classList.add('reduced'); // Adiciona a classe reduzida ao sidebar
-        mainContent.classList.add('ml-16');
-        mainContent.classList.remove('ml-64');
-    } else {
-        sidebar.classList.remove('w-20');
-        sidebar.classList.add('w-64');
-        sidebar.classList.remove('reduced'); // Remove a classe reduzida
-        mainContent.classList.add('ml-64');
-        mainContent.classList.remove('ml-16');
+    // Função para atualizar a margem dependendo do tamanho da tela e do estado do sidebar
+    function updateMainContentMargin() {
+        if (window.innerWidth >= 640) {
+            // Se o sidebar estiver expandido, adicionar a margem ml-64
+            if (sidebar.classList.contains('w-64')) {
+                mainContent.classList.add('ml-64');
+            } else {
+                mainContent.classList.remove('ml-64');
+            }
+        } else {
+            // Em telas pequenas, remover a margem ml-64
+            mainContent.classList.remove('ml-64');
+        }
     }
-});
-    </script>
+
+    toggleSidebar.addEventListener('click', function () {
+        if (sidebar.classList.contains('w-64')) {
+            sidebar.classList.remove('w-64');
+            sidebar.classList.add('w-20');
+            sidebar.classList.add('reduced'); // Adiciona a classe reduzida ao sidebar
+            mainContent.classList.add('ml-16');
+            mainContent.classList.remove('ml-64');
+        } else {
+            sidebar.classList.remove('w-20');
+            sidebar.classList.add('w-64');
+            sidebar.classList.remove('reduced'); // Remove a classe reduzida
+            mainContent.classList.add('ml-64');
+            mainContent.classList.remove('ml-16');
+        }
+        
+        // Atualizar a margem após a mudança no estado do sidebar
+        updateMainContentMargin();
+    });
+
+    // Chamar a função no carregamento para garantir que a margem esteja correta
+    window.addEventListener('resize', updateMainContentMargin);
+    updateMainContentMargin();
+</script>
+
  <script>
         document.addEventListener('DOMContentLoaded', () => {
             const htmlElement = document.documentElement; // Elemento <html>
