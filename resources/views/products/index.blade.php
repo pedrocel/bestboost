@@ -7,13 +7,13 @@
 
     <div class="container mx-auto mt-6 px-4">
         <!-- Cabeçalho com Filtros e Busca -->
-        <div class="mb-6 flex justify-between items-center">
+        <div class="mb-6 flex flex-wrap justify-between items-center">
             <h2 class="text-lg font-medium text-white">Produtos</h2>
 
-            <form method="GET" action="{{ route('cliente.products.index') }}" class="flex space-x-4">
+            <form method="GET" action="{{ route('cliente.products.index') }}" class="flex flex-wrap gap-4 items-center w-full sm:w-auto">
                 <!-- Filtros -->
-                <div class="relative">
-                    <select id="category" name="category" class="mt-1 block w-48 p-2 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                <div class="relative w-full sm:w-auto">
+                    <select id="category" name="category" class="mt-1 block w-full sm:w-48 p-2 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         <option value="">Todas as Categorias</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -24,8 +24,8 @@
                 </div>
 
                 <!-- Barra de Busca -->
-                <div class="relative">
-                    <input type="text" id="search" name="search" placeholder="Buscar por nome" value="{{ request('search') }}" class="p-2 w-48 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <div class="relative w-full sm:w-auto">
+                    <input type="text" id="search" name="search" placeholder="Buscar por nome" value="{{ request('search') }}" class="p-2 w-full sm:w-48 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                 </div>
 
                 <!-- Botão de Filtro -->
@@ -36,12 +36,12 @@
         </div>
 
         <!-- Listagem de Produtos -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach($products as $product)
                 <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:scale-105 transform transition duration-300">
                     <!-- Imagem do Produto -->
                     <a href="{{ route('cliente.products.detail', $product->id) }}">
-                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-64 object-cover cursor-pointer">
+                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="w-full h-48 sm:h-64 object-cover cursor-pointer">
                     </a>
 
                     <div class="p-4">
