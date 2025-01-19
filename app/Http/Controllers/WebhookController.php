@@ -67,5 +67,56 @@ class WebhookController extends Controller
             'status' => 1
         ]);
     }
+
+    public function kiwify(Request $request)
+    {
+        // Armazena o log do webhook
+        $log = WebhookLog::create([
+            'event' => $request->order_status ?? 'unknown',
+            'payload' => $request->all(),
+        ]);
+
+        try {
+            // Verifica o evento
+            if ($request->order_status === 'paid') {
+
+                $user = User::create([
+                    'name' => $request['Customer']['full_name'],
+                    'email' => $request['Customer']['email'],
+                    'password' => Hash::make(123456789),
+                ]);
+        
+                // Cria uma assinatura
+                SubscriptionModel::create([
+                    'user_id' => $user->id,
+                    'offer_id' => 1,
+                    'status' => 'active',
+                    'price' => 10,
+                    'payment_method' => $request['payment_method'],
+                    'paid_at' => now(),
+                ]);
+        
+                UserPerfilModel::create([
+                    'user_id' => $user->id,
+                    'perfil_id' => 2,
+                    'is_atual' => 1,
+                    'status' => 1
+                ]);
+                $log->update(['status' => 'processed']);
+            } else {
+                $log->update(['status' => 'ignored']);
+            }
+
+            return response()->json(['message' => 'Webhook received'], 200);
+        } catch (\Exception $e) {
+            // Atualiza o log com o erro
+            $log->update([
+                'status' => 'failed',
+                'error_message' => $e->getMessage(),
+            ]);
+
+            return response()->json(['message' => 'Webhook processing failed'], 500);
+        }
+    }
 }
 
