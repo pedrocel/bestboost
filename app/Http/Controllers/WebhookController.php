@@ -22,7 +22,7 @@ class WebhookController extends Controller
 
         try {
             // Verifica o evento
-            if ($request->event === 'pix_gerado') {
+            if ($request->event === 'purchase_approved') {
                 $this->processPixPago($request->all());
                 $log->update(['status' => 'processed']);
             } else {
