@@ -86,40 +86,47 @@
         <main id="mainContent" class="flex-1 md:ml-64 sm:ml-0 transition-all duration-300">
         @if (isset($header))
         <header class="bg-white shadow dark:bg-gray-800 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-6">
-            <div>
-                {{ $header }}
-            </div>
-            <!-- Avatar do usuário e menu dropdown -->
-            <div class="relative">
-            <button id="userMenuButton" class="flex items-center space-x-3 focus:outline-none">
-                <div class="relative">
-                    <img 
-                        src="{{ asset('/img/user-circle.png') }}" 
-                        alt="User Avatar" 
-                        class="w-10 h-10 rounded-full border-inside"
-                    />
-                </div>
-                <div class="flex flex-col items-start hidden md:flex">
-                    <span class="text-[16px] font-medium text-gray-800 dark:text-gray-200">
-                        {{ Auth::user()->name }}
-                    </span>
-                    <span class="text-[13px] text-gray-500 dark:text-gray-400 -mt-2">
-                        {{ Auth::user()->profile_name ?? 'Perfil Desconhecido' }}
-                    </span>
-                </div>
-            </button>
+    <div>
+        {{ $header }}
+    </div>
+    
+    <!-- Avatar do usuário, botão de alterar tema e menu dropdown -->
+    <div class="flex items-center space-x-4">
+        <!-- Botão de Alterar Tema -->
+        <button id="themeToggle2" class="flex items-center justify-center w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition duration-300">
+            <i class="fas fa-moon text-gray-800 dark:text-gray-200"></i>
+        </button>
 
-            <!-- Dropdown -->
-            @if(auth()->check())
-                    @if(auth()->user()->adm())
-                        @include('layouts.menu.dropdownAdm')
-                    @elseif(auth()->user()->cliente())
-                        @include('layouts.menu.dropdownCliente')
-                    @else
-                    @endif
-                @endif
+        <!-- Avatar e Nome do Usuário -->
+        <button id="userMenuButton" class="flex items-center space-x-3 focus:outline-none">
+            <div class="relative">
+                <img 
+                    src="{{ asset('/img/user-circle.png') }}" 
+                    alt="User Avatar" 
+                    class="w-10 h-10 rounded-full border-inside"
+                />
             </div>
-        </header>
+            <div class="flex flex-col items-start hidden md:flex">
+                <span class="text-[16px] font-medium text-gray-800 dark:text-gray-200">
+                    {{ Auth::user()->name }}
+                </span>
+                <span class="text-[13px] text-gray-500 dark:text-gray-400 -mt-2">
+                    {{ Auth::user()->profile_name ?? 'Perfil Desconhecido' }}
+                </span>
+            </div>
+        </button>
+
+        <!-- Dropdown -->
+        @if(auth()->check())
+            @if(auth()->user()->adm())
+                @include('layouts.menu.dropdownAdm')
+            @elseif(auth()->user()->cliente())
+                @include('layouts.menu.dropdownCliente')
+            @endif
+        @endif
+    </div>
+</header>
+
     @endif
 
     <div class="py-6 px-4">
@@ -177,6 +184,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const htmlElement = document.documentElement; // Elemento <html>
             const themeToggle = document.getElementById('themeToggle');
+            const themeToggle2 = document.getElementById('themeToggle2');
 
             // Função para alternar tema
             const toggleTheme = () => {
@@ -198,6 +206,7 @@
 
             // Evento para alternar tema
             themeToggle.addEventListener('click', toggleTheme);
+            themeToggle2.addEventListener('click', toggleTheme);
         });
     </script>
     <script>
