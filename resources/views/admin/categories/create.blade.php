@@ -28,7 +28,7 @@
 
             <div class="flex justify-end">
                 <button type="submit" class="btn-create">Salvar</button>
-                <a href="{{ route('perfis.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
+                <a href="{{ route('admin.perfis.index') }}" class="ml-4 text-gray-600 hover:underline">Cancelar</a>
             </div>
         </form>
     </div>
