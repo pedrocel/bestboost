@@ -44,15 +44,14 @@
 
                     <div class="p-4">
                         <h3 class="text-xl font-semibold text-gray-900">{{ $product->name }}</h3>
-                        <p class="text-gray-600 mt-2">{{ $product->description }}</p>
-
+                        <p class="text-gray-600 mt-2">
+                            {{ Str::limit($product->description, 1, '...') }}
+                        </p>
                         <div class="mt-4 flex justify-between items-center">
                             <!-- Status "Em Alta" -->
                             @if($product->is_trending)
                                 <span class="text-green-500 font-bold">Em Alta</span>
                             @endif
-
-                            <!-- Preço -->
                             <span class="text-lg font-semibold text-gray-800">R$ {{ number_format($product->price, 2, ',', '.') }}</span>
                         </div>
 

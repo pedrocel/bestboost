@@ -81,6 +81,9 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('admin')->group(fu
         Route::put('{id}', [CategoryController::class, 'update'])->name('admin.categories.update');
         Route::delete('{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
     });
+
+    Route::get('product/detail/{id}', [ProductLibraryController::class, 'detail'])->name('admin.products.detail');
+
 });
 
 

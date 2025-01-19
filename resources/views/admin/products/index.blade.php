@@ -55,7 +55,6 @@
                             @if($product->is_trending)
                                 <span class="text-green-500 font-bold">Em Alta</span>
                             @endif
-
                             <!-- Preço -->
                             <span class="text-lg font-semibold text-gray-800">R$ {{ number_format($product->price, 2, ',', '.') }}</span>
                         </div>
