@@ -83,8 +83,8 @@
     </button>
 </aside>
         <!-- Main Content -->
-        <main id="mainContent" class="flex-1 ml-64 transition-all duration-300">
-    @if (isset($header))
+        <main id="mainContent" class="flex-1 md:ml-64 sm:ml-0 transition-all duration-300">
+        @if (isset($header))
         <header class="bg-white shadow dark:bg-gray-800 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-6">
             <div>
                 {{ $header }}
@@ -92,39 +92,32 @@
             <!-- Avatar do usuário e menu dropdown -->
             <div class="relative">
             <button id="userMenuButton" class="flex items-center space-x-3 focus:outline-none">
-    <div class="relative">
-        <img 
-            src="{{ asset('/img/user.png') }}" 
-            alt="User Avatar" 
-            class="w-10 h-10 rounded-full border-inside"
-        />
-    </div>
-    <div class="flex flex-col items-start hidden md:flex">
-        <span class="text-[16px] font-medium text-gray-800 dark:text-gray-200">
-            {{ Auth::user()->name }}
-        </span>
-        <span class="text-[13px] text-gray-500 dark:text-gray-400 -mt-2">
-            {{ Auth::user()->profile_name ?? 'Perfil Desconhecido' }}
-        </span>
-    </div>
-</button>
-
-
-                <!-- Dropdown -->
-                <div id="userMenuDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow-lg rounded-lg z-50">
-                    <a href="/account" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        Minha Conta
-                    </a>
-                    <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        Alterar Perfil
-                    </a>
-                    <form method="POST" action="/logout">
-                        @csrf
-                        <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                            Logout
-                        </button>
-                    </form>
+                <div class="relative">
+                    <img 
+                        src="{{ asset('/img/user-circle.png') }}" 
+                        alt="User Avatar" 
+                        class="w-10 h-10 rounded-full border-inside"
+                    />
                 </div>
+                <div class="flex flex-col items-start hidden md:flex">
+                    <span class="text-[16px] font-medium text-gray-800 dark:text-gray-200">
+                        {{ Auth::user()->name }}
+                    </span>
+                    <span class="text-[13px] text-gray-500 dark:text-gray-400 -mt-2">
+                        {{ Auth::user()->profile_name ?? 'Perfil Desconhecido' }}
+                    </span>
+                </div>
+            </button>
+
+            <!-- Dropdown -->
+            @if(auth()->check())
+                    @if(auth()->user()->adm())
+                        @include('layouts.menu.dropdownAdm')
+                    @elseif(auth()->user()->cliente())
+                        @include('layouts.menu.dropdownCliente')
+                    @else
+                    @endif
+                @endif
             </div>
         </header>
     @endif

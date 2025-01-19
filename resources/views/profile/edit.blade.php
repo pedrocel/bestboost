@@ -13,7 +13,7 @@
                 class="tab-link px-4 py-2 border-b-2 font-medium text-sm">
                 Dados Pessoais
             </button>
-            <button 
+            <!-- <button 
                 @click="activeTab = 'dadosBancarios'" 
                 :class="activeTab === 'dadosBancarios' ? 'border-purple-500 text-purple-500' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'"
                 class="tab-link px-4 py-2 border-b-2 font-medium text-sm">
@@ -24,7 +24,7 @@
                 :class="activeTab === 'taxasPlataforma' ? 'border-purple-500 text-purple-500' : 'border-transparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'"
                 class="tab-link px-4 py-2 border-b-2 font-medium text-sm">
                 Taxas da Plataforma
-            </button>
+            </button> -->
         </div>
 
         <!-- Conteúdo das Abas -->
