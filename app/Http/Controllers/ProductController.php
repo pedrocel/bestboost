@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CategoryModel;
 use App\Models\ProductFavoriteModel;
 use App\Models\ProductModel;
+use App\Models\StoreModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,8 @@ class ProductController extends Controller
     {
         $categories = CategoryModel::all(); // Pega todas as categorias
 
+        $stores = StoreModel::all();
+
         // Filtra os produtos por categoria e/ou nome
         $products = ProductModel::query()
             ->when($request->category, function($query) use ($request) {
@@ -22,9 +25,9 @@ class ProductController extends Controller
             ->when($request->search, function($query) use ($request) {
                 return $query->where('name', 'like', '%' . $request->search . '%');
             })
-            ->paginate(12); // Paginação com 12 produtos por página
+            ->paginate(10); // Paginação com 12 produtos por página
 
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'stores'));
     }
 
     public function detail($id){

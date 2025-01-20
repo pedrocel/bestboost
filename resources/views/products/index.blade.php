@@ -8,23 +8,34 @@
         <div class="mb-6 flex flex-wrap justify-between items-center">
             <h2 class="text-lg font-medium text-white">Produtos</h2>
             <form method="GET" action="{{ route('cliente.products.index') }}" class="flex flex-wrap gap-4 items-center w-full sm:w-auto">
-                <div class="relative w-full sm:w-auto">
-                    <select id="category" name="category" class="mt-1 block w-full sm:w-48 p-2 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        <option value="">Todas as Categorias</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="relative w-full sm:w-auto">
-                    <input type="text" id="search" name="search" placeholder="Buscar por nome" value="{{ request('search') }}" class="p-2 w-full sm:w-48 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
-                </div>
-                <button type="submit" class="btn-filter bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                    Filtrar
-                </button>
-            </form>
+    <div class="relative w-full sm:w-auto">
+        <select id="category" name="category" class="mt-1 block w-full sm:w-48 p-2 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <option value="">Todas as Categorias</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <div class="relative w-full sm:w-auto">
+        <select id="store" name="store" class="mt-1 block w-full sm:w-48 p-2 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <option value="">Todas as Lojas</option>
+            @foreach($stores as $store)
+                <option value="{{ $store->id }}" {{ request('store') == $store->id ? 'selected' : '' }}>
+                    {{ $store->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <div class="relative w-full sm:w-auto">
+        <input type="text" id="search" name="search" placeholder="Buscar por nome" value="{{ request('search') }}" class="p-2 w-full sm:w-48 bg-gray-800 text-gray-200 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+    </div>
+    <button type="submit" class="btn-filter bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        Filtrar
+    </button>
+</form>
+
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     @foreach($products as $product)
