@@ -46,7 +46,6 @@
 
                 <!-- Exibe a Imagem da Loja -->
                 <div class="flex items-center space-x-4 mt-4">
-                    {{$product}}
                     <p class="text-gray-600 font-semibold">Loja:</p>
                     @if($product->id_store == 3)
                         <img src="https://logodownload.org/wp-content/uploads/2019/09/magalu-logo.png" alt="Logo Magalu" class="h-8">
