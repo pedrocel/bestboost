@@ -25,6 +25,9 @@ class ProductController extends Controller
             ->when($request->search, function($query) use ($request) {
                 return $query->where('name', 'like', '%' . $request->search . '%');
             })
+            ->when($request->store, function ($query) use ($request) {
+                return $query->where('id_store', $request->store);
+            })
             ->paginate(10); // Paginação com 12 produtos por página
 
         return view('products.index', compact('products', 'categories', 'stores'));

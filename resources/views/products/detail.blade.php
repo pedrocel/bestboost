@@ -44,6 +44,23 @@
                 <!-- Quantidade de Vendas -->
                 <p class="text-gray-600">Vendas: <span class="font-semibold">{{ $product->sales_count }}</span></p>
 
+                <!-- Exibe a Imagem da Loja -->
+                <div class="flex items-center space-x-4 mt-4">
+                    {{$product}}
+                    <p class="text-gray-600 font-semibold">Loja:</p>
+                    @if($product->id_store == 3)
+                        <img src="https://logodownload.org/wp-content/uploads/2019/09/magalu-logo.png" alt="Logo Magalu" class="h-8">
+                    @elseif($product->id_store == 1)
+                        <img src="https://logodownload.org/wp-content/uploads/2021/03/shopee-logo.png" alt="Logo Shopee" class="h-8">
+                    @elseif($product->id_store == 4)
+                        <img src="https://logodownload.org/wp-content/uploads/2014/04/amazon-logo.png" alt="Logo Amazon" class="h-8">
+                    @elseif($product->id_store == 2)
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Shein-logo.png/1200px-Shein-logo.png" alt="Logo Shein" class="h-8">
+                    @else
+                        <p class="text-gray-600"></p>
+                    @endif
+                </div>
+
                 <!-- Ações -->
                 <div class="mt-6 flex space-x-4 items-center">
                     <a href="{{ $product->link }}" target="_blank" class="btn-primary bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
@@ -70,7 +87,6 @@
             <h2 class="text-2xl font-semibold text-gray-800">Informações Adicionais</h2>
             <div class="mt-4 p-4 bg-gray-50 rounded-lg shadow-sm">
                 <p class="text-gray-600"><strong>Categoria:</strong> {{ $product->categoryR->name }}</p>
-                <!-- Adicione mais campos relevantes aqui -->
                 <p class="text-gray-600"><strong>Data de Criação:</strong> {{ $product->created_at->format('d/m/Y') }}</p>
                 <p class="text-gray-600"><strong>Última Atualização:</strong> {{ $product->updated_at->format('d/m/Y') }}</p>
             </div>
