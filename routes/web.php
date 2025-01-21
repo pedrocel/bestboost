@@ -68,7 +68,7 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('admin')->group(fu
         Route::post('/', [ProductController::class, 'store'])->name('admin.products.store');
         Route::get('{id}', [ProductController::class, 'show'])->name('admin.products.show');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
-        Route::put('{id}', [ProductController::class, 'update'])->name('admin.products.update');
+        Route::put('{product}', [ProductController::class, 'update'])->name('admin.products.update');
         Route::delete('{id}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
     });
 
