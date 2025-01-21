@@ -108,6 +108,7 @@ class ProductController extends Controller
         'category' => $request->input('category'),
         'status' => $request->input('status', 1),  // Padrão como visível
         'possible_profit' => $possible_profit,
+        'id_store' => $request->id_store,
     ]);
 
     return redirect()->route('admin.products.index')->with('success', 'Produto atualizado com sucesso!'); // Redireciona de volta para a lista de produtos
